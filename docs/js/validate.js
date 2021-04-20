@@ -7,7 +7,11 @@ function validate(event) {
   // submitted.
 
 
-  var myForm = document.forms["form1"];
+
+  console.log('TODO - validate the longitude, latitude values before submitting');
+}
+
+var myForm = document.forms["form1"];
 var lat = myForm["latitude"];
 var lng = myForm["longitude"];
 var test = document.getElementById("test1");
@@ -17,17 +21,16 @@ console.log(lat.value);
 lat.addEventListener("change", function(e) {
   console.log(lat.value);
   var new1 = lat.value;
-  var new2 = lng.value;
-  var text = document.createTextNode(" Latitude must be between -90 and 90");
-  var text2 = document.createTextNode(" Longitude must be between -180 and 180");
-  var text3 = document.createTextNode(" Enter Something!");
+
   if (new1 < -90 || new1 > 90) {
     
-    test.appendChild(text);
+    test.innerHTML = "* Latitude must be between -90 and 90"
     submit.disabled = true;
+    
   }
-  if (new1 = "") {
-    test.appendChild(text3);
+  else if (new1 > -90 || new1 < 90 ) {
+    test.innerHTML = "*"
+    submit.disabled = false;
   }
 })
 
@@ -35,20 +38,16 @@ lng.addEventListener("change", function(e) {
   console.log(lng.value);
   
   var new2 = lng.value;
-  var text2 = document.createTextNode(" Longitude must be between -180 and 180");
   
   if (new2 < -180 || new2 > 180) {
-    test2.appendChild(text2);
+    test2.innerHTML = "* Longitude must be between -180 and 180"
     submit.disabled = true;
-    if (new1 = "") {
-      test.appendChild(text3);
-    }
+  }
+  else if (new2 > -180 || new2 < 180) {
+    test2.innerHTML = "*"
+    submit.disabled = false;
   }
 })
-  console.log('TODO - validate the longitude, latitude values before submitting');
-}
-
-
 
 // Wait for the window to load, then set up the submit event handler for the form.
 window.onload = function() {
